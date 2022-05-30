@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie/pages/moviedetailspage.dart';
 import 'package:movie/tempdb/tempdb.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +19,9 @@ class _HomePageState extends State<HomePage> {
           movieList.map((movie) => Padding(
             padding: EdgeInsets.all(8.0),
             child: ListTile(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MoveDetailsPage(movie)));
+              },
               title: Text(movie.name!,style: TextStyle(color: Colors.white),),
               subtitle: Text(movie.subTitle!,style: TextStyle(color: Colors.white)),
               leading: Image.asset(movie.image!),
