@@ -25,7 +25,11 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(movie.rating!.toString()),
-                  Icon(Icons.star)
+                  Icon(Icons.star,color: Colors.orange,),
+                  Icon(Icons.star,color: Colors.orange,),
+                  Icon(Icons.star,color: Colors.orange,),
+                  Icon(Icons.star,color: Colors.orange,),
+                  Icon(Icons.star,color: Colors.orange,),
                 ],
               ),
               tileColor: Colors.green,
