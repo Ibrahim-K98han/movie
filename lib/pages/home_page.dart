@@ -32,8 +32,6 @@ class _HomePageState extends State<HomePage> {
                   Icon(Icons.star,color: Colors.orange,),
                   Icon(Icons.star,color: Colors.orange,),
                   Icon(Icons.star,color: Colors.orange,),
-                  Icon(Icons.star,color: Colors.orange,),
-                  Icon(Icons.star,color: Colors.orange,),
                 ],
               ),
               tileColor: Colors.green,
