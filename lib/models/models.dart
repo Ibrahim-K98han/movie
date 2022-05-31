@@ -6,13 +6,15 @@ class Movie{
   String? description;
   double? rating;
   String? image;
+  int? releaseDate;
 
   Movie(
       {this.id,
-      this.name,
-      this.subTitle,
-      this.type,
-      this.description,
-      this.rating,
-      this.image});
+        this.name,
+        this.subTitle,
+        this.type,
+        this.description,
+        this.rating,
+        this.image,
+        this.releaseDate});
 }
