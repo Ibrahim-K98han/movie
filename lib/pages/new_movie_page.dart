@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:movie/db/db_helper.dart';
 import 'package:movie/models/movies.dart';
 import '../tempdb/tempdb.dart';
 
@@ -191,31 +192,38 @@ class _NewMoviePageState extends State<NewMoviePage> {
       });
     }
   }
+  void _takeImage() async{
+    final selectImage = await ImagePicker().pickImage(source: _imageSource);
+    if(selectImage != null){
+      setState((){
+        _imagePath = selectImage.path;
+      });
+    }
+  }
+
+  void _saveMovie(){
+    if(_selectedDate == null){
+      //show(context, 'Please select a date');
+      return;
+    }
+    if(_formKey.currentState!.validate()){
+      final movie = Movie(
+        name: _nameController.text,
+        subTitle: _subTitleController.text,
+        description: _descriptionController.text,
+        rating: double.parse(_ratingController.text),
+        image: _imagePath,
+        type: _type,
+        releaseDate: _selectedDate!.millisecondsSinceEpoch,
+      );
+      DbHelper.insertMovie(movie)
+      .then((rowId) {
+        Navigator.pop(context);
+      }).catchError((error){
+        throw error;
+      });
+      }
+  }
+
 }
 
-void _takeImage() async{
-  final selectImage = await ImagePicker().pickImage(source: _imageSource);
-  if(selectImage != null){
-    setState((){
-      _imagePath = selectImage.path;
-    });
-  }
-}
-
-void _saveMovie(){
-  if(_selectedDate == null){
-    showMsg(context, 'Please select a date');
-    return;
-  }
-  if(_formKey.currentState!.validate()){
-    final movie = Movie(
-      name: _nameController.text,
-      subTitle: _nameController.text,
-      description: _nameController.text,
-      rating: _nameController.text,
-      image: _nameController.text,
-      type: _nameController.text,
-      releaseDate: _nameController.text,
-    )
-  }
-}
