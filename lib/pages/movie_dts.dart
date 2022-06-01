@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../models/movies.dart';
@@ -37,7 +39,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
               title: Text(movie.name!),
               background: Hero(
                   tag: movie.id!,
-                  child: Image.asset(movie.image!, width: double.maxFinite, height: 300, fit: BoxFit.cover,)),
+                  child: Image.file(File(movie.image!), width: double.maxFinite, height: 300, fit: BoxFit.cover,)),
             ),
           ),
           SliverList(

@@ -16,9 +16,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _movieList = <Movie>[];
 
+
   @override
-  void didChangeDependences(){
+  void didChangeDependencies() {
     getData();
+  }
+
+  void getData() {
+    DbHelper.getAllMovies().then((list) {
+      setState(() {
+        _movieList = list;
+      });
+    });
   }
 
   @override
@@ -32,26 +41,18 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () =>
-                Navigator.pushNamed(context, NewMoviePage.routeName).then((value) => {
-                  getData()
+                Navigator.pushNamed(context, NewMoviePage.routeName).then((value) {
+                  getData();
                 }),
           )
         ],
       ),
       body: ListView.builder(
-        itemCount: movieList.length,
+        itemCount: _movieList.length,
         itemBuilder: (context,index) =>
-            MovieItem2(movie: movieList[index]),
+            MovieItem2(movie: _movieList[index]),
       ),
     );
-
-  }
-  void getData() {
-    DbHelper.getAllMovies().then((list) => {
-      setState((){
-        _movieList = list;
-      })
-    });
   }
 }
 

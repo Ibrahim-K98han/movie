@@ -1,5 +1,3 @@
-import 'package:movie/tempdb/tempdb.dart';
-
 const String tblMovie = 'tbl_movie';
 const String tblMovieColId = 'id';
 const String tblMovieColName = 'name';
@@ -29,22 +27,23 @@ class Movie{
         this.image,
         this.releaseDate});
 
-  Map<String, dynamic> toMap(){
-    var map = <String, dynamic>{
-      tblMovieColName: name,
-      tblMovieColDescription: description,
+  Map<String, dynamic> toMap() {
+    var map = <String, dynamic> {
+      tblMovieColName : name,
+      tblMovieColDescription : description,
       tblMovieColImage: image,
       tblMovieColRating: rating,
-      tblMovieColReleaseDate: releaseDate,
-      tblMovieColSubtitle: subTitle,
-      tblMovieColType: type,
+      tblMovieColReleaseDate : releaseDate,
+      tblMovieColSubtitle : subTitle,
+      tblMovieColType : type
     };
-    if(id !=null){
+    if(id != null) {
       map[tblMovieColId] = id;
     }
     return map;
   }
-  factory Movie.fromMap(Map<String, dynamic>map)=>Movie(
+
+  factory Movie.fromMap(Map<String, dynamic> map) => Movie(
     id: map[tblMovieColId],
     name: map[tblMovieColName],
     type: map[tblMovieColType],
@@ -55,4 +54,3 @@ class Movie{
     releaseDate: map[tblMovieColReleaseDate],
   );
 }
-

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../models/movies.dart';
 import '../pages/home_page.dart';
@@ -13,7 +15,7 @@ class MovieItem2 extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
       elevation: 5,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24)
+          borderRadius: BorderRadius.circular(24)
       ),
       child: Stack(
         clipBehavior: Clip.none,
@@ -22,8 +24,8 @@ class MovieItem2 extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             child: Hero(
               tag: movie.id!,
-              child: Image.asset(
-                movie.image!,
+              child: Image.file(
+                File(movie.image!,),
                 width: double.infinity,
                 height: 300,
                 fit: BoxFit.cover,
@@ -37,8 +39,8 @@ class MovieItem2 extends StatelessWidget {
             child: Container(
               //height: 100,
               decoration: BoxDecoration(
-                color: Colors.red.shade300,
-                borderRadius: BorderRadius.circular(24),
+                color: Colors.green.shade700,
+                borderRadius: BorderRadius.circular(12),
               ),
               alignment: Alignment.center,
               child: MovieItem(movie: movie,),
