@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:movie/models/movies.dart';
 import '../tempdb/tempdb.dart';
 
 class NewMoviePage extends StatefulWidget {
@@ -17,6 +19,8 @@ class _NewMoviePageState extends State<NewMoviePage> {
   final _ratingController = TextEditingController();
   String? _type;
   DateTime? _selectedDate;
+  String? _imagePath;
+  var _imageSource = ImageSourece.camera;
 
   @override
   void dispose() {
@@ -31,6 +35,12 @@ class _NewMoviePageState extends State<NewMoviePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('New Movie'),
+        actions: [
+            IconButton(
+              icon: Icon(Icons.done),
+              onPressed: _saveMovie,
+            )
+        ],
       ),
       body: Form(
         child: ListView(
@@ -121,6 +131,46 @@ class _NewMoviePageState extends State<NewMoviePage> {
                 onPressed: _selectDate,
               ),
               trailing: Text(_selectedDate == null ? 'No Date Chosen' : _selectedDate!.toIso8601String()),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Card(
+                          child: _imagePath == null?
+                          Image.asset('images/',fit: BoxFit.cover,):
+                          Image.file(File(_imagePath!),fit:BoxFit.cover),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton.icon(
+                          icon: Icon(Icons.camera),
+                          onPressed: (){
+                            _imageSource = ImageSourece.camera;
+                            _takeImage();
+                          },
+                          label: const Text('Capture'),
+                        ),
+                        TextButton.icon(
+                          icon: Icon(Icons.photo),
+                          onPressed: (){
+                            _imageSource = ImageSourece.gallery;
+                            _takeImage();
+                          },
+                          label: const Text('Gallery'),
+                        ),
+                      ],
+                    )
+                  ]
+              ),
+
             )
           ],
         ),
@@ -140,5 +190,32 @@ class _NewMoviePageState extends State<NewMoviePage> {
         _selectedDate = dt;
       });
     }
+  }
+}
+
+void _takeImage() async{
+  final selectImage = await ImagePicker().pickImage(source: _imageSource);
+  if(selectImage != null){
+    setState((){
+      _imagePath = selectImage.path;
+    });
+  }
+}
+
+void _saveMovie(){
+  if(_selectedDate == null){
+    showMsg(context, 'Please select a date');
+    return;
+  }
+  if(_formKey.currentState!.validate()){
+    final movie = Movie(
+      name: _nameController.text,
+      subTitle: _nameController.text,
+      description: _nameController.text,
+      rating: _nameController.text,
+      image: _nameController.text,
+      type: _nameController.text,
+      releaseDate: _nameController.text,
+    )
   }
 }

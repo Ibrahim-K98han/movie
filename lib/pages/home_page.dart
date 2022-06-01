@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movie/db/db_helper.dart';
 import 'package:movie/tempdb/tempdb.dart';
 
 import '../custom_widgets/movie_item_2.dart';
-import '../models/models.dart';
+import '../models/movies.dart';
 import '../styles.dart';
 import 'new_movie_page.dart';
 
@@ -13,6 +14,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var _movieList = <Movie>[];
+
+  @override
+  void didChangeDependences(){
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +31,10 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () => Navigator.pushNamed(context, NewMoviePage.routeName),
+            onPressed: () =>
+                Navigator.pushNamed(context, NewMoviePage.routeName).then((value) => {
+                  getData()
+                }),
           )
         ],
       ),
@@ -33,6 +44,14 @@ class _HomePageState extends State<HomePage> {
             MovieItem2(movie: movieList[index]),
       ),
     );
+
+  }
+  void getData() {
+    DbHelper.getAllMovies().then((list) => {
+      setState((){
+        _movieList = list;
+      })
+    });
   }
 }
 

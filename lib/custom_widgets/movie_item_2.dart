@@ -1,8 +1,5 @@
-
-
 import 'package:flutter/material.dart';
-
-import '../models/models.dart';
+import '../models/movies.dart';
 import '../pages/home_page.dart';
 import '../pages/movie_dts.dart';
 

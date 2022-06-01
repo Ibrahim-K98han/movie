@@ -1,5 +1,5 @@
 
-import '../models/models.dart';
+import '../models/movies.dart';
 
 final movieList=[
   Movie(id: 1,name: "Ra One",subTitle: "SRK kids movie",type: "Action",description: "Its a cool Movie bu SRK",rating: 4.3,image: 'images/movie1.jpg'),

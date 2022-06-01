@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../models/models.dart';
+import '../models/movies.dart';
 import '../tempdb/tempdb.dart';
 import 'home_page.dart';
 
