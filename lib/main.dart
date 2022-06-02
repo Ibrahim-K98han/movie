@@ -1,10 +1,16 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:movie/pages/home_page.dart';
 import 'package:movie/pages/movie_dts.dart';
 import 'package:movie/pages/new_movie_page.dart';
+import 'package:movie/providers/movie_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => MovieProvider(),
+      child: MyApp()));
 }
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
